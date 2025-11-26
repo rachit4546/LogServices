@@ -23,24 +23,31 @@ log-service/
 │ │ ├── processor.go
 │ │ ├── worker.go
 │ │ └── parser.go
+| | ├── processor_test.go
+│ │ ├── worker_test.go
+│ │ └── parser_test.go
 │ ├── models/
 │ ├── server/router.go
 │ └── storage/upload_store.go
-├── tests/
-│ ├── parser_test.go
-│ ├── worker_test.go
-│ └── metrics_test.go
+├── utils/utils.go
 ├── Makefile
 ├── go.mod
+├── Readme.md
 
 
+ Note:Set the `WORKER_COUNT` environment variable to control the number of workers. 
+    Example : export WORKER_COUNT=10
+If not set, the default value is 5.
 
 Running the Service
 
 1. Initialize Module
     go mod tidy
 
-2. Run Server
+2. Build Repo
+    make build
+
+3. Run Server
     make run
 
 Default server runs on :8080
