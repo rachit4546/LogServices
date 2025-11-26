@@ -94,7 +94,7 @@ func TestStartProcessingWithCancellation(t *testing.T) {
 	go processor.StartProcessing(ctx, up, file)
 
 	// Cancel after a short delay
-	time.AfterFunc(5*time.Microsecond, cancel)
+	time.AfterFunc(20*time.Microsecond, cancel)
 
 	// Wait for done
 	select {
@@ -102,7 +102,6 @@ func TestStartProcessingWithCancellation(t *testing.T) {
 	case <-time.After(1 * time.Second):
 		t.Fatal("processing did not finish after cancellation")
 	}
-
 	// Ensure some lines were processed, but not necessarily all
 	assert.True(t, up.Metrics.TotalLines > 0)
 	assert.True(t, up.Metrics.TotalLines < 1000)

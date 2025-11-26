@@ -58,7 +58,6 @@ func (h *Handler) UploadLogs(c *gin.Context) {
 		Done:      make(chan struct{}),
 		WorkerCnt: val,
 	}
-	fmt.Println("Upload = ", &upload)
 	h.Store.Save(uploadID, upload)
 	go processor.StartProcessing(ctx, upload, src)
 	c.JSON(http.StatusOK, gin.H{"uploadID": uploadID})
